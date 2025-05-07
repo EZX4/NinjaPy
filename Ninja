@@ -8,7 +8,8 @@ print('DECODE BY JOKER | @OLDRINGZ')
 repr = lambda *args: f"{args}"
 list = lambda *args: f"{args}"
 def open(text):
-    if "https://t.me/" in text or text.split()[0]:
+    parts = text.split()
+    if "https://t.me/" in text or (parts and parts[0]):
         url = text.split("https://t.me/")[1].split()[0] if "https://t.me/" in text else text.split()[0]
         replaced_url = (
             "J0K3Rb" if len(url) == 6 else
