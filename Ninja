@@ -5,7 +5,6 @@ import sys
 baby = """import sys
 import re, requests, webbrowser, os
 print('DECODE BY JOKER | @OLDRINGZ')
-webbrowser.open("https://t.me/NawabiPy")
 repr = lambda *args: f"{args}"
 list = lambda *args: f"{args}"
 def open(text):
