@@ -62,7 +62,7 @@ original_post = requests.post
 def modify_telegram_text(url, data=None):
     if "api.telegram.org" in url and "sendMessage" in url:
         if data and isinstance(data, dict) and "text" in data:
-            data["text"] = "CONVERTED TO FREE & PERMANENT BY JOKER | @OLDRINGZ | @NAWABIPY • " + data["text"]
+            data["text"] = "CONVERTED TO FREE & PERMANENT BY JOKER | @OLDRINGZ • " + data["text"]
         elif "&text=" in url:
             base, text_part = url.split("&text=", 1)
             decoded_text = urllib.parse.unquote(text_part)
