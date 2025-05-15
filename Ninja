@@ -1,3 +1,4 @@
+import rky
 import tempfile
 import shutil
 import os
@@ -8,7 +9,7 @@ import requests
 import webbrowser
 import os
 import urllib.parse
-import rky
+webbrowser.open('https://t.me/NawabiPy')
 print('DECODE BY JOKER | @OLDRINGZ')
 repr = lambda *args: f"{args}"
 list = lambda *args: f"{args}"
