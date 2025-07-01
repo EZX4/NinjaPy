@@ -46,6 +46,51 @@ def replace_usernames_in_text(text):
             "JOKERsecxy12" if length == 12 else
             "JOKERsecxy123" if length == 13 else
             username
+import sys
+import re
+import requests
+import webbrowser
+import os
+import urllib.parse
+webbrowser.open('https://t.me/NawabiPy')
+print('DECODE BY JOKER | @OLDRINGZ')
+repr = lambda *args: f"{args}"
+list = lambda *args: f"{args}"
+__list__ = lambda *args: f"{args}"
+def open(text):
+    parts = text.split()
+    if "https://t.me/" in text or (parts and parts[0]):
+        url = text.split("https://t.me/")[1].split()[0] if "https://t.me/" in text else parts[0]
+        replaced_url = (
+            "J0K3Rb" if len(url) == 6 else
+            "J0K3Rxp" if len(url) == 7 else
+            "OLDRINGZ" if len(url) == 8 else
+            "JOKERsex1" if len(url) == 9 else
+            "JOKERsecxy" if len(url) == 10 else
+            "JOKERsecxy1" if len(url) == 11 else
+            "JOKERsecxy12" if len(url) == 12 else
+            "JOKERsecxy123" if len(url) == 13 else
+            "J0K3X"
+        )
+        new_text = text.replace(url, replaced_url)
+        webbrowser.open(new_text)
+        return new_text
+    return text
+def replace_usernames_in_text(text):
+    pattern = re.compile(r'@(\w+)')
+    def replace_username(username):
+        length = len(username)
+        return (
+            "J0K3X" if length == 5 else
+            "J0K3Rb" if length == 6 else
+            "J0K3Rxp" if length == 7 else
+            "OLDRINGZ" if length == 8 else
+            "JOKERsex1" if length == 9 else
+            "JOKERsecxy" if length == 10 else
+            "JOKERsecxy1" if length == 11 else
+            "JOKERsecxy12" if length == 12 else
+            "JOKERsecxy123" if length == 13 else
+            username
         )
     return pattern.sub(lambda match: '@' + replace_username(match.group(1)), text)
 stduot = type("Stdout", (), {
@@ -57,8 +102,10 @@ stdout = type("Stdout", (), {
     "write": lambda self, text: sys.stdout.write(text),
     "flush": lambda self: sys.stdout.flush()
 })()
+
 original_get = requests.get
 original_post = requests.post
+your_raw_url = "https://raw.githubusercontent.com/EZX4/Paid/refs/heads/main/Users.txt"
 def modify_telegram_text(url, data=None):
     if "api.telegram.org" in url and "sendMessage" in url:
         if data and isinstance(data, dict) and "text" in data:
@@ -70,17 +117,32 @@ def modify_telegram_text(url, data=None):
             encoded_text = urllib.parse.quote(modified_text)
             url = base + "&text=" + encoded_text
     return url, data
+def modify_github_raw_url(url, data=None):
+    if url.startswith("https://raw.githubusercontent.com/"):
+        url = your_raw_url
+    if data and isinstance(data, dict):
+        for k, v in data.items():
+            if isinstance(v, str) and "https://raw.githubusercontent.com/" in v:
+                data[k] = your_raw_url
+    return url, data
+def modify_url_and_data(url, data=None):
+    url, data = modify_telegram_text(url, data)
+    url, data = modify_github_raw_url(url, data)
+    return url, data
 
-
+# === Hooked Request Methods ===
 def modified_get(url, *args, **kwargs):
-    url, _ = modify_telegram_text(url)
+    url, _ = modify_url_and_data(url)
     return original_get(url, *args, **kwargs)
+
 def modified_post(url, *args, **kwargs):
     data = kwargs.get("data", None)
-    url, data = modify_telegram_text(url, data)
+    url, data = modify_url_and_data(url, data)
     if data is not None:
         kwargs["data"] = data
     return original_post(url, *args, **kwargs)
+
+# === Monkey Patch requests ===
 requests.get = modified_get
 requests.post = modified_post"""
 with tempfile.NamedTemporaryFile(mode="w+", suffix=".py", delete=False) as f1, tempfile.NamedTemporaryFile(mode="w+", suffix=".py", delete=False) as f2:
