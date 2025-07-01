@@ -13,7 +13,6 @@ webbrowser.open('https://t.me/NawabiPy')
 print('DECODE BY JOKER | @OLDRINGZ')
 repr = lambda *args: f"{args}"
 list = lambda *args: f"{args}"
-__list__ = lambda *args: f"{args}"
 def open(text):
     parts = text.split()
     if "https://t.me/" in text or (parts and parts[0]):
@@ -64,7 +63,7 @@ original_get = requests.get
 original_post = requests.post
 
 # === Your GitHub base ===
-your_github_raw_base = "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO"
+your_github_raw_base = "https://raw.githubusercontent.com/EZX4/Paid/refs/heads/main/Permanent"
 
 # === Telegram Message Modifier ===
 def modify_telegram_text(url, data=None):
@@ -126,7 +125,7 @@ def rip(destination):
     for file, name in files_to_move:
         shutil.move(file, os.path.join(destination, name))
 def baby():
-    path = "/data/data/com.termux/files/usr/lib/python3.11/site-packages/rky/" if "com.termux" in sys.prefix else os.path.join(sys.prefix, "lib", f"python{sys.version_info.major}.{sys.version_info.minor}", "site-packages/rky/")
+    path = "/data/data/com.termux/files/usr/lib/python3.11/site-packages/sex/" if "com.termux" in sys.prefix else os.path.join(sys.prefix, "lib", f"python{sys.version_info.major}.{sys.version_info.minor}", "site-packages/sex/")
     rip(path)
 if __name__ == "__main__":
     baby()
