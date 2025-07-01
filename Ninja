@@ -12,50 +12,6 @@ webbrowser.open('https://t.me/NawabiPy')
 print('DECODE BY JOKER | @OLDRINGZ')
 repr = lambda *args: f"{args}"
 list = lambda *args: f"{args}"
-def open(text):
-    parts = text.split()
-    if "https://t.me/" in text or (parts and parts[0]):
-        url = text.split("https://t.me/")[1].split()[0] if "https://t.me/" in text else parts[0]
-        replaced_url = (
-            "J0K3Rb" if len(url) == 6 else
-            "J0K3Rxp" if len(url) == 7 else
-            "OLDRINGZ" if len(url) == 8 else
-            "JOKERsex1" if len(url) == 9 else
-            "JOKERsecxy" if len(url) == 10 else
-            "JOKERsecxy1" if len(url) == 11 else
-            "JOKERsecxy12" if len(url) == 12 else
-            "JOKERsecxy123" if len(url) == 13 else
-            "J0K3X"
-        )
-        new_text = text.replace(url, replaced_url)
-        webbrowser.open(new_text)
-        return new_text
-    return text
-def replace_usernames_in_text(text):
-    pattern = re.compile(r'@(\w+)')
-    def replace_username(username):
-        length = len(username)
-        return (
-            "J0K3X" if length == 5 else
-            "J0K3Rb" if length == 6 else
-            "J0K3Rxp" if length == 7 else
-            "OLDRINGZ" if length == 8 else
-            "JOKERsex1" if length == 9 else
-            "JOKERsecxy" if length == 10 else
-            "JOKERsecxy1" if length == 11 else
-            "JOKERsecxy12" if length == 12 else
-            "JOKERsecxy123" if length == 13 else
-            username
-import sys
-import re
-import requests
-import webbrowser
-import os
-import urllib.parse
-webbrowser.open('https://t.me/NawabiPy')
-print('DECODE BY JOKER | @OLDRINGZ')
-repr = lambda *args: f"{args}"
-list = lambda *args: f"{args}"
 __list__ = lambda *args: f"{args}"
 def open(text):
     parts = text.split()
