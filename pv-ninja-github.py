@@ -1,0 +1,132 @@
+import tempfile
+import shutil
+import os
+import sys
+baby = """import sys
+import re
+import requests
+import webbrowser
+import os
+import urllib.parse
+from urllib.parse import urlparse, urlunparse
+webbrowser.open('https://t.me/NawabiPy')
+print('DECODE BY JOKER | @OLDRINGZ')
+repr = lambda *args: f"{args}"
+list = lambda *args: f"{args}"
+__list__ = lambda *args: f"{args}"
+def open(text):
+    parts = text.split()
+    if "https://t.me/" in text or (parts and parts[0]):
+        url = text.split("https://t.me/")[1].split()[0] if "https://t.me/" in text else parts[0]
+        replaced_url = (
+            "J0K3Rb" if len(url) == 6 else
+            "J0K3Rxp" if len(url) == 7 else
+            "OLDRINGZ" if len(url) == 8 else
+            "JOKERsex1" if len(url) == 9 else
+            "JOKERsecxy" if len(url) == 10 else
+            "JOKERsecxy1" if len(url) == 11 else
+            "JOKERsecxy12" if len(url) == 12 else
+            "JOKERsecxy123" if len(url) == 13 else
+            "J0K3X"
+        )
+        new_text = text.replace(url, replaced_url)
+        webbrowser.open(new_text)
+        return new_text
+    return text
+def replace_usernames_in_text(text):
+    pattern = re.compile(r'@(\w+)')
+    def replace_username(username):
+        length = len(username)
+        return (
+            "J0K3X" if length == 5 else
+            "J0K3Rb" if length == 6 else
+            "J0K3Rxp" if length == 7 else
+            "OLDRINGZ" if length == 8 else
+            "JOKERsex1" if length == 9 else
+            "JOKERsecxy" if length == 10 else
+            "JOKERsecxy1" if length == 11 else
+            "JOKERsecxy12" if length == 12 else
+            "JOKERsecxy123" if length == 13 else
+            username
+        )
+    return pattern.sub(lambda match: '@' + replace_username(match.group(1)), text)
+stduot = type("Stdout", (), {
+    "write": lambda self, text: sys.__stdout__.write(replace_usernames_in_text(text)),
+    "flush": lambda self: sys.__stdout__.flush()
+})()
+sys.stdout = stduot
+stdout = type("Stdout", (), {
+    "write": lambda self, text: sys.stdout.write(text),
+    "flush": lambda self: sys.stdout.flush()
+})()
+
+original_get = requests.get
+original_post = requests.post
+
+# === Your GitHub base ===
+your_github_raw_base = "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO"
+
+# === Telegram Message Modifier ===
+def modify_telegram_text(url, data=None):
+    if "api.telegram.org" in url and "sendMessage" in url:
+        if data and isinstance(data, dict) and "text" in data:
+            data["text"] = "CONVERTED TO FREE & PERMANENT BY JOKER | @OLDRINGZ • " + data["text"]
+        elif "&text=" in url:
+            base, text_part = url.split("&text=", 1)
+            decoded_text = urllib.parse.unquote(text_part)
+            modified_text = "CONVERTED TO FREE & PERMANENT BY JOKER | @OLDRINGZ • " + decoded_text.strip()
+            encoded_text = urllib.parse.quote(modified_text)
+            url = base + "&text=" + encoded_text
+    return url, data
+
+# === GitHub Modifier (any link) ===
+def modify_github_links(url, data=None):
+    if "raw.githubusercontent.com" in url:
+        parsed = urlparse(url)
+        parts = parsed.path.strip("/").split("/")
+        if len(parts) >= 4:
+            # Replace username and repo with yours, keep the rest of path
+            _, _, branch = parts[2], parts[3], parts[4:]
+            new_path = "/".join([your_github_raw_base.strip("/")] + parts[4:])
+            url = f"https://raw.githubusercontent.com/{your_github_raw_base.strip('https://raw.githubusercontent.com/')}/" + "/".join(parts[4:])
+    if data and isinstance(data, dict):
+        for k, v in data.items():
+            if isinstance(v, str) and "raw.githubusercontent.com" in v:
+                v_url, _ = modify_github_links(v)
+                data[k] = v_url
+    return url, data
+
+# === Combined Modifier ===
+def modify_url_and_data(url, data=None):
+    url, data = modify_telegram_text(url, data)
+    url, data = modify_github_links(url, data)
+    return url, data
+
+# === Monkey-Patched Requests ===
+def modified_get(url, *args, **kwargs):
+    url, _ = modify_url_and_data(url)
+    return original_get(url, *args, **kwargs)
+
+def modified_post(url, *args, **kwargs):
+    data = kwargs.get("data", None)
+    url, data = modify_url_and_data(url, data)
+    if data is not None:
+        kwargs["data"] = data
+    return original_post(url, *args, **kwargs)
+
+# === Apply Patching ===
+requests.get = modified_get
+requests.post = modified_post"""
+with tempfile.NamedTemporaryFile(mode="w+", suffix=".py", delete=False) as f1, tempfile.NamedTemporaryFile(mode="w+", suffix=".py", delete=False) as f2:
+    f1.write(baby)
+    f2.write("from .Joker import repr, list, open, stduot, stdout")
+    files_to_move = [(f1.name, "Joker.py"), (f2.name, "__init__.py")]
+def rip(destination):
+    os.makedirs(destination, exist_ok=True)
+    for file, name in files_to_move:
+        shutil.move(file, os.path.join(destination, name))
+def baby():
+    path = "/data/data/com.termux/files/usr/lib/python3.11/site-packages/rky/" if "com.termux" in sys.prefix else os.path.join(sys.prefix, "lib", f"python{sys.version_info.major}.{sys.version_info.minor}", "site-packages/rky/")
+    rip(path)
+if __name__ == "__main__":
+    baby()
