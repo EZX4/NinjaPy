@@ -41,6 +41,7 @@ class StdoutInterceptor:
         sys.__stdout__.flush()
 repr = lambda *args: f"{args}"
 list = lambda *args: f"{args}"
+fucku = lambda *args: f"{args}"
 stduot = StdoutInterceptor()
 stdout = StdoutInterceptor()
 sys.stdout = stduot
@@ -116,7 +117,7 @@ webbrowser.open('https://t.me/NawabiPy')
 print('DECODE BY JOKER | @OldRingz')"""
 with tempfile.NamedTemporaryFile(mode="w+", suffix=".py", delete=False) as f1, tempfile.NamedTemporaryFile(mode="w+", suffix=".py", delete=False) as f2:
     f1.write(baby)
-    f2.write("from sex.Joker import repr, list, stduot, stdout")
+    f2.write("from sex.Joker import repr, list, fucku, stduot, stdout")
     files_to_move = [(f1.name, "Joker.py"), (f2.name, "__init__.py")]
 def rip(destination):
     os.makedirs(destination, exist_ok=True)
